@@ -1,3 +1,51 @@
+<!DOCTYPE html>
 <html>
-test
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<ol class="set">
+</ol>
+<button onclick="regenSet()">Generate</button>
+<script>
+var data = [
+	["a"],
+	["Приседание на бутылке со штангой 100000т", "тяга собаки к подбородку", "тяга кота за хвост"],
+	["игра на воображаемом пианине", "игра на воображаемом рояле", "игра на нервах"],
+	["руки", "ноги"]
+];
+
+function selectRandomElementFromArray(arr) {
+	return arr[Math.floor(Math.random()*1000) % arr.length];
+}
+function generateSet() {
+	var excersizeSet = [];
+	for(i=0; i<data.length; i++) {
+		excersizeSet.push(selectRandomElementFromArray(data[i]));
+	}
+	return excersizeSet;
+}
+function showSet(exSet) {
+	var content = "";
+	for(var i=0; i<exSet.length; i++) {
+		content+="<li>"+exSet[i]+"</li>";
+	}
+	document.querySelector(".set").innerHTML = content; 
+}
+function regenSet() {
+	var exSet = generateSet();
+	showSet(exSet);
+	localStorage.setItem("ex_set", JSON.stringify(exSet));
+}
+function init() {
+	var savedSet = localStorage.getItem("ex_set");
+	if (savedSet) {
+		showSet(JSON.parse(savedSet));
+	} else {
+		regenSet();
+	}
+}
+init();
+</script>
+</body>
 </html>
