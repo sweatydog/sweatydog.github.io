@@ -106,7 +106,7 @@ function showSet(exSet) {
 function regenSet() {
 	var exSet = generateSet();
 	showSet(exSet);
-	localStorage.setItem("ex_set", JSON.stringify(exSet));
+	localStorage.setItem("ex_set", JSON.stringify(exSet)); 
 }
 function init() {
 	var savedSet = localStorage.getItem("ex_set");
